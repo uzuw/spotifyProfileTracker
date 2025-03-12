@@ -22,7 +22,7 @@ app.use(express.json());
 
 // connectdb();
 
-// app.use("/auth",authRoutes);
+app.use("/auth",authRoutes);
 // app.use("/stats",statsRoutes);
 
 
