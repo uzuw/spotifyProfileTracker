@@ -23,7 +23,7 @@ app.use(express.json());
 // connectdb();
 
 app.use("/auth",authRoutes);
-// app.use("/stats",statsRoutes);
+app.use("/stats",statsRoutes);
 
 
 const PORT=process.env.PORT || 3000;
