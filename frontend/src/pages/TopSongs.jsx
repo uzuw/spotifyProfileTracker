@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Profilepage = () => {
+const TopSongs = () => {
   return (
     <div>
-      
+      songs page
     </div>
   )
 }
 
-export default Profilepage
+export default TopSongs
