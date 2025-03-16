@@ -11,7 +11,7 @@ const connectdb=require('./database/db')
 
 const authRoutes=require('./routes/authRoutes');
 const statsRoutes=require('./routes/statsRoutes');
-
+const userRoutes=require('./routes/userRoutes')
 
 const app=express()
 
@@ -24,7 +24,7 @@ app.use(express.json());
 
 app.use("/auth",authRoutes);
 app.use("/stats",statsRoutes);
-
+app.use("/api",userRoutes);
 
 const PORT=process.env.PORT || 3000;
 app.listen(PORT,()=> console.log(`Server Running on PORT ${PORT}`));

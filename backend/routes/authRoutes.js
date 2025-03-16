@@ -1,7 +1,6 @@
 const express = require("express");
 const SpotifyWebApi = require("spotify-web-api-node");
 require("dotenv").config();
-
 const router = express.Router();
 
 // Initialize Spotify API client
@@ -27,12 +26,9 @@ router.get("/callback", async (req, res) => {
     spotifyApi.setAccessToken(data.body.access_token);
     spotifyApi.setRefreshToken(data.body.refresh_token);
 
-    // Return tokens as JSON (no redirect to frontend)
-    res.json({
-      accessToken: data.body.access_token,
-      refreshToken: data.body.refresh_token,
-      expiresIn: data.body.expires_in,
-    });
+    // redirect to frontend
+    const userData = await spotifyApi.getMe();
+    res.redirect(`http://localhost:5173/home?name=${userData.body.display_name}&email=${userData.body.email}&followers=${userData.body.followers.total}&image=${userData.body.images[0]?.url}`);
   } catch (err) {
     console.error("Callback Error:", err);
     res.status(400).json({ error: "Failed to authenticate" });
