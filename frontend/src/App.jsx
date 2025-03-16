@@ -10,11 +10,11 @@ import Friendify from "../../frontend/src/pages/Friendify";
 function App() {
   return (
     <Router>
-      <div className="relative flex">
-        <Navbar />
+      <div className="relative flex font-Poppins">
+        <Navbar/>
         <div className="ml-20 p-6 flex-grow">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/top-artists" element={<TopArtists />} />
             <Route path="/top-songs" element={<TopSongs />} />
             <Route path="/recently-played" element={<RecentlyPlayed />} />
