@@ -2,6 +2,7 @@ import Welcome from '../components/Home/Welcome';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import CurrSong from '../components/Home/CurrSong';
+import TopCards from '../components/Home/TopCards';
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -52,10 +53,13 @@ const Home = () => {
       {accessToken ? (
         <div>
           {<CurrSong token={accessToken} />}
+          {<TopCards token={accessToken}/>}
         </div>
+        
       ) : (
         <div className="mt-4 text-gray-500">Please connect your Spotify account</div>
       )}
+
     </div>
   );
 };

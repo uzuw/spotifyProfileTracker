@@ -7,6 +7,8 @@ import TopSongs from "../../frontend/src/pages/TopSongs";
 import RecentlyPlayed from "../../frontend/src/pages/RecentlyPlayed";
 import Friendify from "../../frontend/src/pages/Friendify";
 
+
+
 function App() {
   return (
     <Router>
