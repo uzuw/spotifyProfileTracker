@@ -9,7 +9,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 const Navbar = () => {
   return (
-    <nav className="fixed left-4 top-1/2 -translate-y-1/2 bg-gray-200 bg-opacity-80 backdrop-blur-md p-4 border-gray-100 border-1 rounded-2xl shadow-xl flex flex-col items-center space-y-6">
+    <nav className="fixed left-4 top-1/2 -translate-y-1/2 bg-gray-100 bg-opacity-80 backdrop-blur-md p-4 border-gray-200 border rounded-2xl shadow-xl flex flex-col items-center space-y-6">
       <NavLink to="/home" className="text-gray-800 hover:text-gray-400">
         <HomeIcon fontSize="large" />
       </NavLink>

@@ -1,7 +1,5 @@
 
-const href=async(req,res)=>{}
-
-const Welcome = ({user,onConnect}) => {//user and handleConnect is passed if its fetched successgully
+const Welcome = ({user,onConnect,token}) => {//user and handleConnect is passed if its fetched successgully
     
   return (
     <div className="flex flex-col justify-center h-auto p-10 bg-white text-black border-1 border-gray-200 rounded-2xl my-20 shadow-md shadow-gray-100">
