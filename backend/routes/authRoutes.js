@@ -12,7 +12,13 @@ const spotifyApi = new SpotifyWebApi({
 
 // Step 1: Redirect user to Spotify login page
 router.get("/login", (req, res) => {
-  const scopes = ["user-top-read", "user-read-recently-played"];
+  const scopes = [
+    "user-top-read",
+    "user-read-recently-played",
+    "user-read-private",
+    "user-read-email",
+    "user-read-currently-playing",
+  ];
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });
 
@@ -20,15 +26,29 @@ router.get("/login", (req, res) => {
 router.get("/callback", async (req, res) => {
   try {
     const code = req.query.code;
+
+    // Exchange code for access token
     const data = await spotifyApi.authorizationCodeGrant(code);
 
     // Store the tokens
     spotifyApi.setAccessToken(data.body.access_token);
     spotifyApi.setRefreshToken(data.body.refresh_token);
 
-    // redirect to frontend
+    // Fetch user profile data
     const userData = await spotifyApi.getMe();
-    res.redirect(`http://localhost:5173/home?name=${userData.body.display_name}&email=${userData.body.email}&followers=${userData.body.followers.total}&image=${userData.body.images[0]?.url}`);
+
+    // Construct the URL with query parameters
+    const queryParams = new URLSearchParams({
+      name: userData.body.display_name || "N/A",
+      email: userData.body.email || "N/A", // Spotify API may not return email
+      followers: userData.body.followers?.total || 0,
+      image: userData.body.images[0]?.url || "N/A",
+      id: userData.body.id || "N/A",
+      country: userData.body.country || "N/A", 
+    });
+
+    // Redirect to the frontend with query parameters
+    res.redirect(`http://localhost:5173/home?${queryParams.toString()}`);
   } catch (err) {
     console.error("Callback Error:", err);
     res.status(400).json({ error: "Failed to authenticate" });
