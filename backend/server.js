@@ -12,7 +12,7 @@ const connectdb=require('./database/db')
 const authRoutes=require('./routes/authRoutes');
 const statsRoutes=require('./routes/statsRoutes');
 const userRoutes=require('./routes/userRoutes')
-
+const currentSong=require('./routes/currentSong')
 const app=express()
 
 app.use(cors({origin: "http://localhost:5173",credentials:true}));
@@ -25,6 +25,7 @@ app.use(express.json());
 app.use("/auth",authRoutes);
 app.use("/stats",statsRoutes);
 app.use("/api",userRoutes);
+app.use("/api",currentSong)
 
 const PORT=process.env.PORT || 3000;
 app.listen(PORT,()=> console.log(`Server Running on PORT ${PORT}`));

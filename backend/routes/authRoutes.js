@@ -18,6 +18,7 @@ router.get("/login", (req, res) => {
     "user-read-private",
     "user-read-email",
     "user-read-currently-playing",
+    "user-read-playback-state", // Add this scope
   ];
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });
@@ -33,6 +34,15 @@ router.get("/callback", async (req, res) => {
     // Store the tokens
     spotifyApi.setAccessToken(data.body.access_token);
     spotifyApi.setRefreshToken(data.body.refresh_token);
+
+    // Set tokens in response headers to call in front end
+    const accessToken = data.body.access_token;
+    const refreshToken = data.body.refresh_token;
+    res.setHeader("Authorization", `Bearer ${accessToken}`);
+    res.setHeader("Refresh-Token", refreshToken);
+    
+    console.log(accessToken)
+
 
     // Fetch user profile data
     const userData = await spotifyApi.getMe();
