@@ -54,11 +54,11 @@ router.get("/callback", async (req, res) => {
       followers: userData.body.followers?.total || 0,
       image: userData.body.images[0]?.url || "N/A",
       id: userData.body.id || "N/A",
-      country: userData.body.country || "N/A", 
+      country: userData.body.country || "N/A",
     });
 
     // Redirect to the frontend with query parameters
-    res.redirect(`http://localhost:5173/home?${queryParams.toString()}`);
+    res.redirect(`http://localhost:5173/home?${queryParams.toString()}&access_token=${accessToken}`);
   } catch (err) {
     console.error("Callback Error:", err);
     res.status(400).json({ error: "Failed to authenticate" });
