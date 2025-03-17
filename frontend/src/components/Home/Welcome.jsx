@@ -1,4 +1,5 @@
 
+const href=async(req,res)=>{}
 
 const Welcome = ({user,onConnect}) => {//user and handleConnect is passed if its fetched successgully
     
@@ -7,11 +8,24 @@ const Welcome = ({user,onConnect}) => {//user and handleConnect is passed if its
     {user?
     //when user is logged in
     <div className="flex flex-row justify-between items-center space-y-4">
-      <div className="flex flex-col">
-        <h1 className="text-3xl font-bold py-1">Hi! {user.name}</h1>
-        <p className="text-gray-400 py-1">You lit</p>
-        <p className="text-sm text-gray-500 py-1">You have {user.followers} followers</p>
+      <div className="flex flex-col gap-2 font-spaceMono">
+        <h1 className="text-3xl font-bold ">Hi! {user.name}</h1>
+        <p className="text-gray-500 ">Email: {user.email} <span className="text-green-400 px-2">{user.country}</span></p> 
+        <p className="text-sm text-gray-400 ">You have <span className="text-green-400">{user.followers}</span> followers</p>
+        <button
+            onClick={() => window.location.href = `https://open.spotify.com/user/${user.id}`}
+            className="bg-green-500 hover:bg-green-600 w-50 py-2 my-4 rounded-full text-lg font-bold transition"
+            >
+            Visit Profile
+            </button>
+        
+      
+        
+          
+          
+          
       </div>
+      
       
       <img
         src={user.image}
