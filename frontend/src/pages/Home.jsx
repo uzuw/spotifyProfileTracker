@@ -13,14 +13,19 @@ const Home = () => {
   const email = queryParams.get("email");
   const followers = queryParams.get("followers");
   const image = queryParams.get("image");
+  const id=queryParams.get("id");
+  const country=queryParams.get("country");
+  
 
-    if (name && email && followers && image) {
+    if (name && email && followers && image && id && country) {
       // If user data is present in query params, set the user state
       setUser({
         name,
         email,
         followers,
         image,
+        country,
+        id,
       });
     } else {
       // If user data is not found in query params, try fetching from backend
@@ -34,7 +39,7 @@ const Home = () => {
         });
     }
   }, []);
-  
+
   const handleConnect = () =>{
     window.location.href = "http://localhost:3000/auth/login";//redirect to the Spotify
   }
