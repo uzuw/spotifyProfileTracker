@@ -1,5 +1,6 @@
 const express = require("express");
 const SpotifyWebApi = require("spotify-web-api-node");
+const User = require("../models/User");
 const router = express.Router();
 
 router.get("/user", async (req, res) => {
@@ -29,10 +30,8 @@ router.get("/user", async (req, res) => {
       email: userData.body.email,
       followers: userData.body.followers.total,
       profileImage: userData.body.images?.[0]?.url,
-      country: userData.body.country,
-      href: userData.body.href,
-      product: userData.body.product,
-      type: userData.body.type,
+      country: userData.country,
+      id:userData.body.id,
     });
   } catch (e) {
     console.error("Error fetching the user data:", e.message);
