@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import getCurrentlyPlaying from "../../services/getCurrentlyPlaying";
 import { LinearProgress } from "@mui/material"; // Import Material UI Progress Bar
-
+import HeadsetOffIcon from '@mui/icons-material/HeadsetOff';
 
 const formatTime = (ms) => {
   const totalSeconds = Math.floor(ms / 1000);
@@ -87,7 +87,7 @@ const CurrSong = ({ token }) => {
           </div>
         </div>
       ) : (
-        <p className="text-center text-lg text-gray-500">No song is currently playing</p>
+        <p className="text-left text-lg text-gray-500 py-10 px-5">No song is currently playing <HeadsetOffIcon fontSize="medium" className="mx-5"/></p>
       )}
     </div>
   );

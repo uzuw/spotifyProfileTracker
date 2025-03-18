@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import CurrSong from '../components/Home/CurrSong';
 import TopCards from '../components/Home/TopCards';
+import SpotifyTrending from '../components/Home/SpotifyTrending';
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -54,6 +55,7 @@ const Home = () => {
         <div>
           {<CurrSong token={accessToken} />}
           {<TopCards token={accessToken}/>}
+          {<SpotifyTrending token={accessToken}/>}
         </div>
         
       ) : (
