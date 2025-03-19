@@ -30,7 +30,7 @@ router.get("/top-tracks", setAccessToken, async (req, res) => {
 // Fetch recently played tracks
 router.get("/recently-played", setAccessToken, async (req, res) => {
   try {
-    const data = await req.spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 });
+    const data = await req.spotifyApi.getMyRecentlyPlayedTracks({ limit:1 });
     res.json(data.body);
   } catch (err) {
     console.error("Error fetching recently played tracks:", err);
