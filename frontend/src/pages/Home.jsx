@@ -47,10 +47,6 @@ const Home = () => {
 
   return (
     <div className='p-5'>
-      <div>
-        <h1 className='text-3xl font-MontSerat font-extrabold'>Friendify</h1>
-        <h1 className='py-2 text-sm font-extralight text-gray-500'>Your personal Spotify tracker</h1>
-      </div>
       <Welcome user={user} onConnect={handleConnect} />
       {accessToken ? (
         <div>

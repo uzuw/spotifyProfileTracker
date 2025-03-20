@@ -11,6 +11,10 @@ import Friendify from "../../frontend/src/pages/Friendify";
 
 function App() {
   return (
+    <div>
+        <h1 className='text-3xl font-MontSerat font-extrabold px-30 pt-10'>Friendify</h1>
+        <h1 className=' text-sm font-extralight text-gray-500 px-30 pt-2'>Your personal Spotify tracker</h1>
+    
     <Router>
       <div className="relative flex font-Poppins">
         <Navbar/>
@@ -25,6 +29,7 @@ function App() {
         </div>
       </div>
     </Router>
+  </div>
   );
 }
 
