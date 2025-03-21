@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/top-artists", setAccessToken, async (req, res) => {
   try {
     // Use the Spotify API instance from middleware
-    const data = await req.spotifyApi.getMyTopArtists({ limit: 10 });
+    const data = await req.spotifyApi.getMyTopArtists({ limit:50 });
     res.status(200).json(data.body);
   } catch (err) {
     console.error("Error fetching top artists:", err);
@@ -19,7 +19,7 @@ router.get("/top-artists", setAccessToken, async (req, res) => {
 // Fetch top tracks
 router.get("/top-tracks", setAccessToken, async (req, res) => {
   try {
-    const data = await req.spotifyApi.getMyTopTracks({ limit: 10 });
+    const data = await req.spotifyApi.getMyTopTracks({ limit:10 });
     res.json(data.body);
   } catch (err) {
     console.error("Error fetching top tracks:", err);
