@@ -19,7 +19,7 @@ router.get("/top-artists", setAccessToken, async (req, res) => {
 // Fetch top tracks
 router.get("/top-tracks", setAccessToken, async (req, res) => {
   try {
-    const data = await req.spotifyApi.getMyTopTracks({ limit:10 });
+    const data = await req.spotifyApi.getMyTopTracks({ limit:50 });
     res.json(data.body);
   } catch (err) {
     console.error("Error fetching top tracks:", err);
