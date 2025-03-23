@@ -13,9 +13,7 @@ const TopSongs = ({ token }) => {
       setLoading(true);
 
       try {
-        const response = await fetch("https://api.spotify.com/v1/me/top/tracks?limit=50", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(`http://localhost:3000/stats/top-tracks?accessToken=${token}`);
         const data = await response.json();
         setTopSongs(data.items || []);
       } catch (error) {
@@ -44,6 +42,8 @@ const TopSongs = ({ token }) => {
       <h1 className="py-10 mt-10 md:py-20 w-full font-DmSans text-center font-extrabold text-5xl md:text-7xl lg:text-8xl text-black bg-gradient-to-tl from-purple-400 to-pink-200">
         Your Song Picks
       </h1>
+
+      <h2 className="py-5 text-gray-500 font-spaceMono text-xl">Your top songs are:</h2>
 
       {loading ? (
         <p className="text-gray-400">Loading...</p>

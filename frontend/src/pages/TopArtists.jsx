@@ -12,9 +12,7 @@ const TopArtists = ({ token }) => {
       
       setLoading(true);
       try {
-        const response = await fetch("https://api.spotify.com/v1/me/top/artists?limit=50", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(`http://localhost:3000/stats/top-artists?accessToken=${token}`);
         const data = await response.json();
         setArtists(data.items || []);
       } catch (error) {

@@ -13,7 +13,7 @@ const Home = ({ token, user, onConnect }) => {
           <CurrSong token={token} />
           <LastPlayed token={token} />
           <TopCards token={token} />
-          {/* <SpotifyTrending token={token} /> */}
+          <SpotifyTrending token={token} />
         </div>
       ) : (
         <div className="mt-4 text-gray-500">Please connect your Spotify account</div>
