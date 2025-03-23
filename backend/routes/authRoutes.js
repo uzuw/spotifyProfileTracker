@@ -20,6 +20,7 @@ router.get("/login", (req, res) => {
     "user-read-currently-playing",
     "user-read-playback-state", // Add this scope
     "playlist-read-collaborative",
+    "playlist-read-private",
   ];
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });

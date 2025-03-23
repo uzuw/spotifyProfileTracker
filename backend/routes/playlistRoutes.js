@@ -4,7 +4,7 @@ const axios = require("axios");
 const router = express.Router();
 
 // Fetching the top global Spotify playlist
-router.get("/top-global", async (req, res) => {
+router.get("/topGlobal", async (req, res) => {
     const accessToken = req.query.accessToken;
 
     if (!accessToken) {
@@ -19,13 +19,24 @@ router.get("/top-global", async (req, res) => {
             },
         });
 
-        res.status(200).json(response.data);
+        // Extract relevant data
+        const tracks = response.data.items.map((item) => ({
+            name: item.track.name,
+            artist: item.track.artists.map((artist) => artist.name).join(", "),
+            album: item.track.album.name,
+            image: item.track.album.images[0]?.url, // Album cover image
+            url: item.track.external_urls.spotify, // Spotify track link
+        }));
+
+        res.status(200).json(tracks);
     } catch (error) {
         console.error("Error fetching Spotify playlist:", error.response?.data || error.message);
 
-        // Check for token expiration error
-        if (error.response && error.response.status === 401) {
-            return res.status(401).json({ error: "Invalid or expired access token" });
+        if (error.response) {
+            if (error.response.status === 401) {
+                return res.status(401).json({ error: "Invalid or expired access token" });
+            }
+            return res.status(error.response.status).json({ error: error.response.data });
         }
 
         res.status(500).json({ error: "Failed to fetch top global songs" });

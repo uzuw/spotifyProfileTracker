@@ -27,10 +27,20 @@ router.get("/top-tracks", setAccessToken, async (req, res) => {
   }
 });
 
-// Fetch recently played tracks
-router.get("/recently-played", setAccessToken, async (req, res) => {
+// Fetch last played tracks
+router.get("/last-played", setAccessToken, async (req, res) => {
   try {
     const data = await req.spotifyApi.getMyRecentlyPlayedTracks({ limit:1 });
+    res.json(data.body);
+  } catch (err) {
+    console.error("Error fetching recently played tracks:", err);
+    res.status(500).json({ error: "Failed to fetch recently played tracks" });
+  }
+});
+//fetch recently played tracks
+router.get("/recently-played", setAccessToken, async (req, res) => {
+  try {
+    const data = await req.spotifyApi.getMyRecentlyPlayedTracks({ limit:50 });
     res.json(data.body);
   } catch (err) {
     console.error("Error fetching recently played tracks:", err);
@@ -40,3 +50,5 @@ router.get("/recently-played", setAccessToken, async (req, res) => {
 
 // Exporting the router only once
 module.exports = router;
+
+
