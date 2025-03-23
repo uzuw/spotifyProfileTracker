@@ -8,7 +8,7 @@ const LastPlayed = ({ token }) => {
     if (!token) return; // Prevent fetching if token is missing
 
     setLoading(true);
-    fetch(`http://localhost:3000/stats/recently-played?accessToken=${token}`)
+    fetch(`http://localhost:3000/stats/last-played?accessToken=${token}`)
       .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch data");
         return response.json();
