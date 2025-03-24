@@ -48,6 +48,17 @@ router.get("/recently-played", setAccessToken, async (req, res) => {
   }
 });
 
+router.get('/likedSongs',async(req,res)=>{
+  try{
+    const data=await req.spotifyApi.getMySavedTracks({limit:100});
+    res.status(200).json(data.body);
+    }
+    catch(err){
+      console.error("Error fetching liked songs:", err);
+      res.status(500).json({ error: "Failed to fetch liked songs" });
+    }
+})
+
 // Exporting the router only once
 module.exports = router;
 
