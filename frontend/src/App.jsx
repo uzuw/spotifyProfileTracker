@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "../../frontend/src/components/Navbar";
 import Home from "../../frontend/src/pages/Home";
 import TopArtists from "../../frontend/src/pages/TopArtists";
 import TopSongs from "../../frontend/src/pages/TopSongs";
 import RecentlyPlayed from "../../frontend/src/pages/RecentlyPlayed";
-import Friendify from "../../frontend/src/pages/Friendify";
+import Vinyl from "../../frontend/src/pages/Vinyl";
+import './App.css'
 
 function App() {
   const [accessToken, setAccessToken] = useState(null);
@@ -43,24 +44,37 @@ function App() {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-MontSerat font-extrabold px-30 pt-10">Friendify</h1>
-      <h2 className="text-sm font-extralight text-gray-500 px-30 pt-2">Your personal Spotify tracker</h2>
+    <Router>
+      <AppContent accessToken={accessToken} user={user} onConnect={handleConnect} />
+    </Router>
+  );
+}
 
-      <Router>
-        <div className="relative flex font-Poppins">
-          <Navbar />
-          <div className="ml-20 p-6 flex-grow">
-            <Routes>
-              <Route path="/home" element={<Home token={accessToken} user={user} onConnect={handleConnect} />} />
-              <Route path="/top-artists" element={<TopArtists token={accessToken} />} />
-              <Route path="/top-songs" element={<TopSongs token={accessToken} />} />
-              <Route path="/recently-played" element={<RecentlyPlayed token={accessToken} />} />
-              <Route path="/friendify" element={<Friendify />} />
-            </Routes>
-          </div>
+function AppContent({ accessToken, user, onConnect }) {
+  const location = useLocation();
+  const isVinylPage = location.pathname === "/vinyl"; // Check if on Vinyl page
+
+  return (
+    <div>
+      {!isVinylPage && ( // Conditionally render headers
+        <>
+          <h1 className="text-3xl font-MontSerat font-extrabold px-30 pt-10">Friendify</h1>
+          <h2 className="text-sm font-extralight text-gray-500 px-30 pt-2">Your personal Spotify tracker</h2>
+        </>
+      )}
+
+      <div className="relative flex font-Poppins">
+        <Navbar />
+        <div className="ml-20 p-6 flex-grow">
+          <Routes>
+            <Route path="/home" element={<Home token={accessToken} user={user} onConnect={onConnect} />} />
+            <Route path="/top-artists" element={<TopArtists token={accessToken} />} />
+            <Route path="/top-songs" element={<TopSongs token={accessToken} />} />
+            <Route path="/recently-played" element={<RecentlyPlayed token={accessToken} />} />
+            <Route path="/vinyl" element={<Vinyl token={accessToken} />} />
+          </Routes>
         </div>
-      </Router>
+      </div>
     </div>
   );
 }
