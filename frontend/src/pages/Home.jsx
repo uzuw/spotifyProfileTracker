@@ -8,12 +8,12 @@ const Home = ({ token, user, onConnect }) => {
   return (
     <div className="p-5">
       <Welcome user={user} onConnect={onConnect} />
-      {token ? (
+      {token && user ? (
         <div>
           <CurrSong token={token} />
           <LastPlayed token={token} />
           <TopCards token={token} />
-          <SpotifyTrending token={token} />
+          {/* <SpotifyTrending token={token} /> spotify doesnt allow no more */}
         </div>
       ) : (
         <div className="mt-4 text-gray-500">Please connect your Spotify account</div>

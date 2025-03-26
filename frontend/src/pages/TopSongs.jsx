@@ -52,7 +52,8 @@ const TopSongs = ({ token }) => {
           {topSongs.map((song, index) => {
             if (!songsRefs.current[index]) songsRefs.current[index] = null;
             return (
-              <div
+              <a
+                href={song.external_urls.spotify}
                 key={song.id}
                 ref={(el) => (songsRefs.current[index] = el)}
                 className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md transition hover:shadow-lg"
@@ -64,7 +65,7 @@ const TopSongs = ({ token }) => {
                 />
                 <p className="font-bold text-lg text-center">{song.name}</p>
                 <p className="text-gray-500 text-sm">{song.artists.map(artist => artist.name).join(", ")}</p>
-              </div>
+              </a>
             );
           })}
         </div>

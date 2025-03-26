@@ -9,7 +9,7 @@ const TopArtists = ({ token }) => {
   useEffect(() => {
     const fetchTopArtists = async () => {
       if (!token) return;
-      
+
       setLoading(true);
       try {
         const response = await fetch(`http://localhost:3000/stats/top-artists?accessToken=${token}`);
@@ -25,7 +25,7 @@ const TopArtists = ({ token }) => {
   }, [token]);
 
   useLayoutEffect(() => {
-    if (artists.length <50) {
+    if (artists.length < 50) {
       gsap.from(artistRefs.current.filter(el => el), {
         opacity: 0,
         y: 30,
@@ -51,15 +51,18 @@ const TopArtists = ({ token }) => {
           {artists.map((artist, index) => {
             artistRefs.current[index] = artistRefs.current[index] || null; // Ensure ref is set before rendering
             return (
-              <div
+              <a
                 key={artist.id}
+                href={artist.external_urls.spotify}
+                target="_blank"
+                rel="noopener noreferrer"  // Ensure security and performance when opening new tabs
                 ref={(el) => artistRefs.current[index] = el} // Assign refs dynamically
                 className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md transition hover:shadow-lg"
               >
                 <img src={artist.images[0]?.url} alt={artist.name} className="w-28 h-28 rounded-full object-cover mb-2" />
                 <p className="font-bold text-lg text-center">{artist.name}</p>
                 <p className="text-gray-500 text-sm">{artist.followers.total.toLocaleString()} followers</p>
-              </div>
+              </a>
             );
           })}
         </div>
