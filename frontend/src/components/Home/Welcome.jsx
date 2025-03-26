@@ -16,12 +16,7 @@ const Welcome = ({user,onConnect,token}) => {//user and handleConnect is passed 
             >
             Visit Profile
             </button>
-        
-      
-        
-          
-          
-          
+            
       </div>
       
       
@@ -34,12 +29,12 @@ const Welcome = ({user,onConnect,token}) => {//user and handleConnect is passed 
     
     : 
 
-    <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Welcome to Friendify</h1>
-        <p className="text-gray-300 text-lg">Connect your Spotify to view your Stats</p>
+    <div className="text-center space-y-3">
+        <h1 className="text-7xl font-bold font-Poppins py-2">Welcome to Spoted</h1>
+        <p className="text-gray-300 text-lg py-3">Connect your Spotify to view your Stats</p>
         <button
             onClick={onConnect}
-            className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-full text-lg font-bold transition"
+            className="bg-green-500 hover:bg-green-600 my-4 px-6 py-4 rounded-full text-lg font-bold transition"
         >
             Connect to Spotify
         </button>

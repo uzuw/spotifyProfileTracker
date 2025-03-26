@@ -4,7 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import HistoryIcon from "@mui/icons-material/History";
-import GroupIcon from "@mui/icons-material/Group";
+import AlbumIcon from '@mui/icons-material/Album';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 const Navbar = () => {
@@ -22,8 +22,8 @@ const Navbar = () => {
       <NavLink to="/recently-played" className="text-gray-800 hover:text-gray-400">
         <HistoryIcon fontSize="large" />
       </NavLink>
-      <NavLink to="/friendify" className="text-gray-800 hover:text-gray-400">
-        <GroupIcon fontSize="large" />
+      <NavLink to="/vinyl" className="text-gray-800 hover:text-gray-400">
+        <AlbumIcon fontSize="large" />
       </NavLink>
       <a><SettingsIcon fontSize="large" className="text-gray-800 hover:text-gray-400"/></a>
     </nav>
