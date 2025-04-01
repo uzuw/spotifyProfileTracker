@@ -2,6 +2,8 @@ const express = require("express");
 const SpotifyWebApi = require("spotify-web-api-node");
 require("dotenv").config();
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+
 
 // Initialize Spotify API client
 const spotifyApi = new SpotifyWebApi({
@@ -9,6 +11,11 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
   redirectUri: "http://localhost:3000/auth/callback", // Backend handles authentication
 });
+
+const generateJWT = (spotifyId) => {
+  return jwt.sign({ spotifyId }, process.env.JWT_SECRET, { expiresIn: "7d" });
+};
+
 
 // Step 1: Redirect user to Spotify login page
 router.get("/login", (req, res) => {
@@ -47,8 +54,16 @@ router.get("/callback", async (req, res) => {
     console.log(accessToken)
 
 
+
+
     // Fetch user profile data
     const userData = await spotifyApi.getMe();
+    
+
+    //generating jwt using spoitfy id
+    const spotifyId = userData.body.id;
+    const token = generateJWT(spotifyId);
+
 
     // Construct the URL with query parameters
     const queryParams = new URLSearchParams({
@@ -58,10 +73,13 @@ router.get("/callback", async (req, res) => {
       image: userData.body.images[0]?.url || "N/A",
       id: userData.body.id || "N/A",
       country: userData.body.country || "N/A",
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      jwt: token,
     });
 
     // Redirect to the frontend with query parameters
-    res.redirect(`http://localhost:5173/home?${queryParams.toString()}&access_token=${accessToken}`);
+    res.redirect(`http://localhost:5173/home?${queryParams.toString()}`);
   } catch (err) {
     console.error("Callback Error:", err);
     res.status(400).json({ error: "Failed to authenticate" });
