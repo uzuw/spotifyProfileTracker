@@ -88,7 +88,7 @@ const Vinyl = ({ token }) => {
       <div ref={dropdownRef} className="fixed top-5 left-1/2 transform -translate-x-1/2 w-[40%] bg-white shadow-lg rounded-lg border-gray-200 z-50">
         <input
           type="text"
-          placeholder="  Search for a track or album"
+          placeholder="Search for a track or album"
           value={query}
           onChange={handleSearchChange}
           className="w-full p-2 border border-gray-300 rounded-lg text-lg text-gray-800 focus:outline-none"
