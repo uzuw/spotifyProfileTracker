@@ -106,3 +106,5 @@ router.get("/refresh-token", async (req, res) => {
   }
 });
 
+module.exports = router;
+
